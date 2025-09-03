@@ -1,0 +1,40 @@
+From 6fbbf384d6642ef238397f5de3ed9397e3972502 Mon Sep 17 00:00:00 2001
+From: flandolf <66240551+flandolf@users.noreply.github.com>
+Date: Thu, 14 Aug 2025 19:13:22 +1000
+Subject: [PATCH] Add qti_kernel_headers and update touch HAL format and
+ version
+
+Change-Id: I1677a0d11873ba2984ddcd7f6a6b08f6f30ab4be
+
+diff --git a/build/soong/Android.bp b/build/soong/Android.bp
+index 5dac8598..3ef57f6b 100644
+--- a/build/soong/Android.bp
++++ b/build/soong/Android.bp
+@@ -99,3 +99,8 @@ cc_library_headers {
+     name: "prebuilt_kernel_headers",
+     defaults: ["prebuilt_kernel_header_defaults"],
+ }
++
++cc_library_headers {
++    name: "qti_kernel_headers",
++    defaults: ["generated_kernel_header_defaults"],
++}
+diff --git a/config/device_framework_matrix.xml b/config/device_framework_matrix.xml
+index 8429b505..b4b70798 100644
+--- a/config/device_framework_matrix.xml
++++ b/config/device_framework_matrix.xml
+@@ -128,9 +128,9 @@
+         </interface>
+     </hal>
+     <!-- Touch -->
+-    <hal format="aidl" optional="true">
++    <hal format="hidl" optional="true">
+         <name>vendor.lineage.touch</name>
+-        <version>1</version>
++        <version>1.0</version>
+         <interface>
+             <name>IGloveMode</name>
+             <instance>default</instance>
+-- 
+2.48.1
+

@@ -1,0 +1,59 @@
+From 7d36d7b2ff0a6665fe80c518d91619a07ddf37a2 Mon Sep 17 00:00:00 2001
+From: flandolf <66240551+flandolf@users.noreply.github.com>
+Date: Sat, 17 May 2025 10:14:48 +1000
+Subject: [PATCH] Add haptic effects profile and touch rate settings to
+ SecureSettings
+
+
+diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
+index 4c2b42425dd5..fec194fee844 100644
+--- a/core/java/android/provider/Settings.java
++++ b/core/java/android/provider/Settings.java
+@@ -12140,6 +12140,18 @@ public final class Settings {
+          */
+         public static final String SCREEN_OFF_UNLOCK_UDFPS_ENABLED = "screen_off_udfps_enabled";
+ 
++        /**
++         * Haptic effects profile to be used
++         * @hide
++         */
++        public static final String HAPTIC_EFFECTS_PROFILE = "haptic_effects_profile";
++
++        /**
++         * Whether to increase touch polling rate
++         * @hide
++        */
++        public static final String HIGH_TOUCH_RATE_ENABLED = "high_touch_rate_enabled";
++        
+         /**
+          * Whether or not debugging is enabled.
+          * @hide
+diff --git a/packages/SettingsProvider/src/android/provider/settings/backup/SecureSettings.java b/packages/SettingsProvider/src/android/provider/settings/backup/SecureSettings.java
+index 8411b5876012..8173c8a0fd1d 100644
+--- a/packages/SettingsProvider/src/android/provider/settings/backup/SecureSettings.java
++++ b/packages/SettingsProvider/src/android/provider/settings/backup/SecureSettings.java
+@@ -139,6 +139,8 @@ public class SecureSettings {
+         Settings.Secure.FINGERPRINT_SIDE_FPS_AUTH_DOWNTIME,
+         Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
+         Settings.Secure.SCREEN_OFF_UNLOCK_UDFPS_ENABLED,
++        Settings.Secure.HAPTIC_EFFECTS_PROFILE,
++        Settings.Secure.HIGH_TOUCH_RATE_ENABLED,
+         Settings.Secure.ACTIVE_UNLOCK_ON_WAKE,
+         Settings.Secure.ACTIVE_UNLOCK_ON_UNLOCK_INTENT,
+         Settings.Secure.ACTIVE_UNLOCK_ON_UNLOCK_INTENT_LEGACY,
+diff --git a/packages/SettingsProvider/src/android/provider/settings/validators/SecureSettingsValidators.java b/packages/SettingsProvider/src/android/provider/settings/validators/SecureSettingsValidators.java
+index aed4bf591299..a95beca422ee 100644
+--- a/packages/SettingsProvider/src/android/provider/settings/validators/SecureSettingsValidators.java
++++ b/packages/SettingsProvider/src/android/provider/settings/validators/SecureSettingsValidators.java
+@@ -218,6 +218,8 @@ public class SecureSettingsValidators {
+         VALIDATORS.put(Secure.FINGERPRINT_SIDE_FPS_AUTH_DOWNTIME, NON_NEGATIVE_INTEGER_VALIDATOR);
+         VALIDATORS.put(Secure.SFPS_PERFORMANT_AUTH_ENABLED, BOOLEAN_VALIDATOR);
+         VALIDATORS.put(Secure.SCREEN_OFF_UNLOCK_UDFPS_ENABLED, BOOLEAN_VALIDATOR);
++        VALIDATORS.put(Secure.HAPTIC_EFFECTS_PROFILE, ANY_STRING_VALIDATOR);
++        VALIDATORS.put(Secure.HIGH_TOUCH_RATE_ENABLED, BOOLEAN_VALIDATOR);
+         VALIDATORS.put(Secure.SHOW_MEDIA_WHEN_BYPASSING, BOOLEAN_VALIDATOR);
+         VALIDATORS.put(Secure.FACE_UNLOCK_APP_ENABLED, BOOLEAN_VALIDATOR);
+         VALIDATORS.put(Secure.FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, BOOLEAN_VALIDATOR);
+-- 
+2.48.1
+
