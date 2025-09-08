@@ -1,15 +1,15 @@
-From 7d36d7b2ff0a6665fe80c518d91619a07ddf37a2 Mon Sep 17 00:00:00 2001
+From 223dc6b6fae43b58503ae0857d1e709ef2224f53 Mon Sep 17 00:00:00 2001
 From: flandolf <66240551+flandolf@users.noreply.github.com>
-Date: Sat, 17 May 2025 10:14:48 +1000
-Subject: [PATCH] Add haptic effects profile and touch rate settings to
- SecureSettings
+Date: Thu, 4 Sep 2025 17:52:22 +1000
+Subject: [PATCH] [FEATURE] add new settings for haptic effects and touch rate
 
+Change-Id: Iba5c8ecf2185648779fb16e045059fe225bc8365
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 4c2b42425dd5..fec194fee844 100644
+index cbbb462e8c7e..3415794651b9 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -12140,6 +12140,18 @@ public final class Settings {
+@@ -11670,6 +11670,24 @@ public final class Settings {
           */
          public static final String SCREEN_OFF_UNLOCK_UDFPS_ENABLED = "screen_off_udfps_enabled";
  
@@ -24,33 +24,41 @@ index 4c2b42425dd5..fec194fee844 100644
 +         * @hide
 +        */
 +        public static final String HIGH_TOUCH_RATE_ENABLED = "high_touch_rate_enabled";
++
++        /**
++         * Whether to enable ltpo features
++         * @hide
++         */
++        public static final String LTPO_FEATURES_ENABLED = "ltpo_features_enabled";
 +        
          /**
           * Whether or not debugging is enabled.
           * @hide
 diff --git a/packages/SettingsProvider/src/android/provider/settings/backup/SecureSettings.java b/packages/SettingsProvider/src/android/provider/settings/backup/SecureSettings.java
-index 8411b5876012..8173c8a0fd1d 100644
+index 0c91b658ccee..06fba7cc1452 100644
 --- a/packages/SettingsProvider/src/android/provider/settings/backup/SecureSettings.java
 +++ b/packages/SettingsProvider/src/android/provider/settings/backup/SecureSettings.java
-@@ -139,6 +139,8 @@ public class SecureSettings {
+@@ -144,6 +144,9 @@ public class SecureSettings {
          Settings.Secure.FINGERPRINT_SIDE_FPS_AUTH_DOWNTIME,
          Settings.Secure.SFPS_PERFORMANT_AUTH_ENABLED,
          Settings.Secure.SCREEN_OFF_UNLOCK_UDFPS_ENABLED,
 +        Settings.Secure.HAPTIC_EFFECTS_PROFILE,
 +        Settings.Secure.HIGH_TOUCH_RATE_ENABLED,
++        Settings.Secure.LTPO_FEATURES_ENABLED,
          Settings.Secure.ACTIVE_UNLOCK_ON_WAKE,
          Settings.Secure.ACTIVE_UNLOCK_ON_UNLOCK_INTENT,
          Settings.Secure.ACTIVE_UNLOCK_ON_UNLOCK_INTENT_LEGACY,
 diff --git a/packages/SettingsProvider/src/android/provider/settings/validators/SecureSettingsValidators.java b/packages/SettingsProvider/src/android/provider/settings/validators/SecureSettingsValidators.java
-index aed4bf591299..a95beca422ee 100644
+index 568377b539be..e020f7072074 100644
 --- a/packages/SettingsProvider/src/android/provider/settings/validators/SecureSettingsValidators.java
 +++ b/packages/SettingsProvider/src/android/provider/settings/validators/SecureSettingsValidators.java
-@@ -218,6 +218,8 @@ public class SecureSettingsValidators {
+@@ -203,6 +203,9 @@ public class SecureSettingsValidators {
          VALIDATORS.put(Secure.FINGERPRINT_SIDE_FPS_AUTH_DOWNTIME, NON_NEGATIVE_INTEGER_VALIDATOR);
          VALIDATORS.put(Secure.SFPS_PERFORMANT_AUTH_ENABLED, BOOLEAN_VALIDATOR);
          VALIDATORS.put(Secure.SCREEN_OFF_UNLOCK_UDFPS_ENABLED, BOOLEAN_VALIDATOR);
 +        VALIDATORS.put(Secure.HAPTIC_EFFECTS_PROFILE, ANY_STRING_VALIDATOR);
 +        VALIDATORS.put(Secure.HIGH_TOUCH_RATE_ENABLED, BOOLEAN_VALIDATOR);
++        VALIDATORS.put(Secure.LTPO_FEATURES_ENABLED, BOOLEAN_VALIDATOR);
          VALIDATORS.put(Secure.SHOW_MEDIA_WHEN_BYPASSING, BOOLEAN_VALIDATOR);
          VALIDATORS.put(Secure.FACE_UNLOCK_APP_ENABLED, BOOLEAN_VALIDATOR);
          VALIDATORS.put(Secure.FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, BOOLEAN_VALIDATOR);

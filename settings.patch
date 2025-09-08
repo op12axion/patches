@@ -1,20 +1,9 @@
-From 5bbb32ee2c1da9d8075f3a45010dd88bd0990a5b Mon Sep 17 00:00:00 2001
+From a4d75faa5c2a8d964c91189f47be7f080c3540eb Mon Sep 17 00:00:00 2001
 From: flandolf <66240551+flandolf@users.noreply.github.com>
-Date: Sun, 10 Aug 2025 20:19:40 +1000
-Subject: [PATCH] add haptics control
+Date: Thu, 4 Sep 2025 17:49:58 +1000
+Subject: [PATCH] Settings: Add haptic effect style and LTPO features options
 
-Change-Id: Id2124c0081c90b293f9f01258cc32d5504bb5559
----
- res/values/arrays.xml                         | 14 ++++
- res/values/config.xml                         |  3 +
- res/values/strings.xml                        |  3 +
- ...ssibility_vibration_intensity_settings.xml |  7 ++
- res/xml/accessibility_vibration_settings.xml  |  7 ++
- .../HapticStyleListPreference.java            | 23 ++++++
- .../HapticStylePreferenceController.java      | 79 +++++++++++++++++++
- 7 files changed, 136 insertions(+)
- create mode 100644 src/com/android/settings/accessibility/HapticStyleListPreference.java
- create mode 100644 src/com/android/settings/accessibility/HapticStylePreferenceController.java
+Change-Id: I24e5d6446a892248ff0452a68333599f63e533af
 
 diff --git a/res/values/arrays.xml b/res/values/arrays.xml
 index 80c3e8d2c4b..2f4a45f72b4 100644
@@ -40,31 +29,40 @@ index 80c3e8d2c4b..2f4a45f72b4 100644
 +
  </resources>
 diff --git a/res/values/config.xml b/res/values/config.xml
-index 1177b5cb8aa..fc0a75d843c 100644
+index 1177b5cb8aa..a69df2cd016 100644
 --- a/res/values/config.xml
 +++ b/res/values/config.xml
-@@ -856,4 +856,7 @@
+@@ -856,4 +856,11 @@
  
      <!-- Whether the Gaze is enabled -->
      <bool name="config_gazeEnabled">false</bool>
 +
 +    <!-- Show haptic styles -->
 +    <bool name="config_supportHapticProfiles" translatable="false">false</bool>
++
++    <!-- Show LTOP features option -->
++    <bool name="config_supportLtpoFeatures" translatable="false">false</bool>
++    
  </resources>
 diff --git a/res/values/strings.xml b/res/values/strings.xml
-index 774e776022b..6bf2f521f34 100644
+index 774e776022b..0aabeef28b5 100644
 --- a/res/values/strings.xml
 +++ b/res/values/strings.xml
-@@ -14399,4 +14399,7 @@ Data usage charges may apply.</string>
+@@ -14399,4 +14399,12 @@ Data usage charges may apply.</string>
      <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->
      <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>
      <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
 +
 +    <!-- Haptic Effect Style -->
 +    <string name="haptic_effect_style_title">Haptic effect style</string>
++
++    <!-- LTPO Features -->
++    <string name="ltpo_features_title">Enable LTPO features</string>
++    <string name="ltpo_features_summary">Enables device-specific adaptive idle and frame rate features for improving efficiency</string>
++
  </resources>
 diff --git a/res/xml/accessibility_vibration_intensity_settings.xml b/res/xml/accessibility_vibration_intensity_settings.xml
-index 17e9f93b7b9..2066d843453 100644
+index a36b20b8ffd..d6cac123475 100644
 --- a/res/xml/accessibility_vibration_intensity_settings.xml
 +++ b/res/xml/accessibility_vibration_intensity_settings.xml
 @@ -65,6 +65,13 @@
@@ -82,7 +80,7 @@ index 17e9f93b7b9..2066d843453 100644
              android:key="vibration_intensity_preference_touch"
              android:title="@string/accessibility_touch_vibration_title"
 diff --git a/res/xml/accessibility_vibration_settings.xml b/res/xml/accessibility_vibration_settings.xml
-index be45659b310..7590713f533 100644
+index b8cb2305a16..8266655b7cc 100644
 --- a/res/xml/accessibility_vibration_settings.xml
 +++ b/res/xml/accessibility_vibration_settings.xml
 @@ -65,6 +65,13 @@
@@ -99,6 +97,23 @@ index be45659b310..7590713f533 100644
          <SwitchPreferenceCompat
              android:key="vibration_preference_touch"
              android:title="@string/accessibility_touch_vibration_title"
+diff --git a/res/xml/display_settings.xml b/res/xml/display_settings.xml
+index 9855304325e..ca8810cea13 100644
+--- a/res/xml/display_settings.xml
++++ b/res/xml/display_settings.xml
+@@ -176,6 +176,12 @@
+             android:fragment="com.android.settings.display.RefreshRateSettings"
+             settings:controller="com.android.settings.display.RefreshRateSettingsPreferenceController" />
+ 
++        <SwitchPreferenceCompat
++            android:key="ltpo_features"
++            android:title="@string/ltpo_features_title"
++            android:summary="@string/ltpo_features_summary"
++            settings:controller="com.android.settings.display.LtpoFeaturesPreferenceController" />
++            
+         <SwitchPreferenceCompat
+             android:key="show_operator_name"
+             android:title="@string/show_operator_name_title"
 diff --git a/src/com/android/settings/accessibility/HapticStyleListPreference.java b/src/com/android/settings/accessibility/HapticStyleListPreference.java
 new file mode 100644
 index 00000000000..2ee30f49a91
@@ -212,6 +227,74 @@ index 00000000000..3698115f7d8
 +            mPreference.setSummary(mPreference.getEntries()[index]);
 +        }
 +        return true;
++    }
++}
+\ No newline at end of file
+diff --git a/src/com/android/settings/display/LtpoFeaturesPreferenceController.java b/src/com/android/settings/display/LtpoFeaturesPreferenceController.java
+new file mode 100644
+index 00000000000..4b84dff73c2
+--- /dev/null
++++ b/src/com/android/settings/display/LtpoFeaturesPreferenceController.java
+@@ -0,0 +1,61 @@
++/*
++ * Copyright (C) 2021 The Proton AOSP Project
++ *
++ * Licensed under the Apache License, Version 2.0 (the "License");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *      http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an "AS IS" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++package com.android.settings.display;
++
++import android.content.Context;
++import android.os.SystemProperties;
++import android.provider.Settings;
++
++import com.android.settings.core.TogglePreferenceController;
++import com.android.settings.R;
++
++public class LtpoFeaturesPreferenceController extends TogglePreferenceController {
++
++    // Settings can only set the debug.* property, so we need to persist it
++    // in system settings. Match the stock setting name for backup compatibility.
++    private static final String SETTINGS_KEY = Settings.Secure.LTPO_FEATURES_ENABLED;
++    private static final String PROP_NAME = "debug.ltpo_features";
++
++    public LtpoFeaturesPreferenceController(Context context, String preferenceKey) {
++        super(context, preferenceKey);
++    }
++
++    @Override
++    public int getAvailabilityStatus() {
++        return mContext.getResources().getBoolean(R.bool.config_supportLtpoFeatures)
++            ? AVAILABLE
++            : UNSUPPORTED_ON_DEVICE;
++    }
++
++    @Override
++    public boolean setChecked(boolean value) {
++        Settings.Secure.putInt(mContext.getContentResolver(), SETTINGS_KEY, value ? 1 : 0);
++        SystemProperties.set(PROP_NAME, value ? "1" : "0");
++        return true;
++    }
++
++    @Override
++    public boolean isChecked() {
++        // debug prop isn't persistent
++        return Settings.Secure.getInt(mContext.getContentResolver(), SETTINGS_KEY, 0) == 1;
++    }
++
++    @Override
++    public int getSliceHighlightMenuRes() {
++        return R.string.menu_key_display;
 +    }
 +}
 \ No newline at end of file
