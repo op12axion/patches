@@ -1,10 +1,10 @@
-From d0185b6f87f008b8e2de293a88b81edcf58f36ab Mon Sep 17 00:00:00 2001
+From b0197c836a0afd0b715d3f723c05cff4d63e8ad8 Mon Sep 17 00:00:00 2001
 From: andy <66240551+flandolf@users.noreply.github.com>
-Date: Tue, 9 Sep 2025 17:05:38 +1000
-Subject: [PATCH] [CONFIG] update touch HAL format and version; clean up APN
- entries
+Date: Tue, 9 Sep 2025 19:31:42 +1000
+Subject: [PATCH] [FIX] update touch HAL format and version in device framework
+ matrix [UPDATE] modify APN entries for Optus in apns-conf.xml
 
-Change-Id: Ida5fa8ebdfd01ae8e5d0da09863276a4b8ece2bc
+Change-Id: I7f20b242af29307385c1082cb6ec182b2dbd5853
 
 diff --git a/config/device_framework_matrix.xml b/config/device_framework_matrix.xml
 index 8d5b4107..4b6c880e 100644
@@ -23,10 +23,10 @@ index 8d5b4107..4b6c880e 100644
              <name>IGloveMode</name>
              <instance>default</instance>
 diff --git a/prebuilt/common/etc/apns-conf.xml b/prebuilt/common/etc/apns-conf.xml
-index e045912d..a3199cee 100644
+index e045912d..92629490 100644
 --- a/prebuilt/common/etc/apns-conf.xml
 +++ b/prebuilt/common/etc/apns-conf.xml
-@@ -3349,19 +3349,6 @@
+@@ -3349,23 +3349,6 @@
    <apn carrier="Telstra w/ Portal" mcc="505" mnc="01" apn="telstra.internet" proxy="10.1.1.181" port="80" mmsc="http://mmsc.telstra.com:8002" mmsproxy="10.1.1.181" mmsport="80" type="default,supl,mms" />
    <apn carrier="Telstra 3G Pay by Time" mcc="505" mnc="01" apn="telstra.pcpack" password="telstra" type="default,supl,mms" />
    <apn carrier="Belong Internet/MMS" mcc="505" mnc="01" apn="mdata.net.au" mmsc="http://mmsc.mdata.net.au:8003" mmsproxy="10.1.1.180" mmsport="80" type="default,dun,supl,mms" protocol="IPV4V6" roaming_protocol="IP" />
@@ -43,17 +43,21 @@ index e045912d..a3199cee 100644
 -  <apn carrier="Virgin AU" mcc="505" mnc="02" apn="virgininternet" user="*" password="*" server="*" type="default,supl" />
 -  <apn carrier="Virgin AU MMS" mcc="505" mnc="02" apn="virginmms" user="*" password="*" server="*" proxy="202.139.083.152" port="8070" mmsc="http://mms.virginvibe.com.au:8002/" mmsproxy="202.139.083.152" mmsport="8070" type="mms" />
 -  <apn carrier="Optus Internet" mcc="505" mnc="02" apn="yesinternet" user="*" password="*" server="*" type="default,supl" />
-   <apn carrier="Apex Telecom" mcc="505" mnc="02" apn="splns357" user="" password="" mmsc="" type="default,supl" />
-   <apn carrier="Boost MMS" mcc="505" mnc="02" apn="mms" user="" password="" proxy="61.88.190.10" port="8070" mmsc="http://mmsc.optus.com.au:8002/" mmsproxy="61.88.190.10" mmsport="8070" type="mms" authtype="3" />
-   <apn carrier="Boost Mobile" mcc="505" mnc="02" apn="yesinternet" user="" password="" proxy="" port="" mmsc="" type="default,supl" authtype="3" />
-@@ -3385,8 +3372,8 @@
+-  <apn carrier="Apex Telecom" mcc="505" mnc="02" apn="splns357" user="" password="" mmsc="" type="default,supl" />
+-  <apn carrier="Boost MMS" mcc="505" mnc="02" apn="mms" user="" password="" proxy="61.88.190.10" port="8070" mmsc="http://mmsc.optus.com.au:8002/" mmsproxy="61.88.190.10" mmsport="8070" type="mms" authtype="3" />
+-  <apn carrier="Boost Mobile" mcc="505" mnc="02" apn="yesinternet" user="" password="" proxy="" port="" mmsc="" type="default,supl" authtype="3" />
+-  <apn carrier="Truphone" mcc="505" mnc="02" apn="truphone.com" type="default,dun" mvno_match_data="50502100" mvno_type="imsi" />
+   <apn carrier="Vodafone Live!" mcc="505" mnc="03" apn="live.vodafone.com" proxy="10.202.2.60" port="8080" mmsc="" user="" password="" type="default,supl" />
+   <apn carrier="Vodafone PXT" mcc="505" mnc="03" apn="live.vodafone.com" proxy="" port="" mmsproxy="10.202.2.60" mmsport="8080" mmsc="http://pxt.vodafone.net.au/pxtsend" user="" password="" type="mms" />
+   <apn carrier="Vodafone AU" mcc="505" mnc="03" apn="live.vodafone.com" user="*" password="*" server="*" mmsc="http://pxt.vodafone.net.au/pxtsend" mmsproxy="10.202.2.60" mmsport="8080" type="mms,default,supl" />
+@@ -3385,8 +3368,8 @@
    <apn carrier="Telstra Internet" mcc="505" mnc="72" apn="Telstra.wap" proxy="" port="" user="" password="" mmsc="" type="default,supl" />
    <apn carrier="VF AU PXT" mcc="505" mnc="88" apn="live.vodafone.com" mmsc="http://pxt.vodafone.net.au/pxtsend" mmsproxy="10.202.2.60" mmsport="8080" type="mms" />
    <apn carrier="VF Internet" mcc="505" mnc="88" apn="vfinternet.au" type="default,supl" />
 -  <apn carrier="Optus Internet" mcc="505" mnc="90" apn="internet" type="default,supl" />
 -  <apn carrier="Optus MMS" mcc="505" mnc="90" apn="mms" mmsc="http://mmsc.optus.com.au:8002/" mmsproxy="61.88.190.10" mmsport="8070" type="mms" />
-+  <apn carrier="Optus Yes Internet" mcc="505" mnc="90" apn="yesinternet" type="default,supl" />
-+  <apn carrier="Optus MMS" mcc="505" mnc="02" apn="mms" mmsc="http://mmsc.optus.com.au:8002/" mmsproxy="61.88.190.10" mmsport="8070" type="mms" auth_type="1" />
++  <apn carrier="Optus Yes Internet" mcc="505" mnc="02" apn="yesinternet" type="default,supl" />
++  <apn carrier="Optus MMS" mcc="505" mnc="02" apn="mms" mmsc="http://mmsc.optus.com.au:8002/" mmsproxy="61.88.190.10" mmsport="8070" type="mms" />
    <apn carrier="Indosat 3G" mcc="510" mnc="01" apn="indosatgprs" proxy="" port="" user="indosat" password="indosat" authtype="1" type="default,supl" />
    <apn carrier="Indosat 3.5G" mcc="510" mnc="01" apn="indosat3g" proxy="" port="" user="indosat" password="indosat" authtype="1" type="default,supl" />
    <apn carrier="Indosat MMS" mcc="510" mnc="01" apn="indosatmms" mmsproxy="10.19.19.19" mmsport="8080" mmsc="http://mmsc.indosat.com" user="indosat" password="indosat" authtype="1" type="mms" />
