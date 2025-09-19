@@ -1,0 +1,41 @@
+From a06e97b10787bd653c26537710917a37ec7a1cd6 Mon Sep 17 00:00:00 2001
+From: andy <66240551+flandolf@users.noreply.github.com>
+Date: Thu, 18 Sep 2025 19:52:05 +1000
+Subject: [PATCH] fix: update flashlight strength detection logic
+
+Change-Id: I4a931e655b3d92d460daa97f39810bf43195cd24
+
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/policy/FlashlightStrengthController.kt b/packages/SystemUI/src/com/android/systemui/statusbar/policy/FlashlightStrengthController.kt
+index b519d988b2bc..ecf1e95615da 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/policy/FlashlightStrengthController.kt
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/policy/FlashlightStrengthController.kt
+@@ -111,17 +111,17 @@ class FlashlightStrengthController @Inject constructor(
+         runCatching {
+             for (id in cm.cameraIdList) {
+                 val c = cm.getCameraCharacteristics(id)
+-                val ok = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
+-                val max = c.get(CameraCharacteristics.FLASH_INFO_STRENGTH_MAXIMUM_LEVEL) ?: 1
+-                val def = c.get(CameraCharacteristics.FLASH_INFO_STRENGTH_DEFAULT_LEVEL) ?: 0
+-                if (ok && max > 1) {
+-                    torchId = id
+-                    _maxLevel = max
+-                    _supported = true
+-                    break
++                val hasFlash = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
++                if (hasFlash) {
++                    torchId = id          
++                    _supported = false   
++                    _maxLevel = 1      
++                    break 
+                 }
+             }
+-        }.onFailure { _supported = false }
++        }.onFailure {
++            _supported = false
++        }
+     }
+ 
+     fun handleClick() {
+-- 
+2.51.0
+
