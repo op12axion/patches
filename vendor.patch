@@ -1,35 +1,21 @@
-From 6e5de420dd0e221162995ce0a4a0b6240a1cd185 Mon Sep 17 00:00:00 2001
+From ad03985ed542959a1e5fa91f8913cf4b608d9342 Mon Sep 17 00:00:00 2001
 From: andy <66240551+flandolf@users.noreply.github.com>
-Date: Thu, 18 Sep 2025 18:41:53 +1000
-Subject: [PATCH] Refactor configuration files: comment out unused heap size
- settings, update HAL format, and clean up APN entries for Optus
+Date: Mon, 22 Sep 2025 20:38:48 +1000
+Subject: [PATCH] [FIX] Update APN configurations and correct touch HAL
+ versioning
 
-Change-Id: I917fd95e87e4a935c3584dd0191d5dc3b7df75f5
+Change-Id: Ic5d4d0be4dcefa545bf9655e5b8a7e14328e8af0
 
 diff --git a/config/defaults_common.prop b/config/defaults_common.prop
-index a774b4dd..3aab2124 100644
+index fd367efc..78408611 100644
 --- a/config/defaults_common.prop
 +++ b/config/defaults_common.prop
-@@ -11,8 +11,8 @@ pm.dexopt.downgrade_after_inactive_days=10
- 
- # Default heap sizes. Allow up to 256m for large heaps to make sure a single app
- # doesn't take all of the RAM.
--dalvik.vm.heapgrowthlimit=128m
--dalvik.vm.heapsize=256m
-+# dalvik.vm.heapgrowthlimit=128m
-+# dalvik.vm.heapsize=256m
- dalvik.vm.madvise-random=true
- dalvik.vm.enable_pr_dexopt=false
- dalvik.vm.finalizer-timeout-ms=40000
-@@ -35,7 +35,7 @@ ro.input.video_enabled=false
+@@ -22,4 +22,4 @@ ro.input.video_enabled=false
  debug.graphics.game_default_frame_rate.disabled=true
  
  # sf
--ro.surface_flinger.uclamp.min=10
-+# ro.surface_flinger.uclamp.min=10
- 
- # memcg
- ro.config.per_app_memcg=true
+-ro.surface_flinger.uclamp.min=1
++# ro.surface_flinger.uclamp.min=1
 diff --git a/config/device_framework_matrix.xml b/config/device_framework_matrix.xml
 index 8d5b4107..4b6c880e 100644
 --- a/config/device_framework_matrix.xml
