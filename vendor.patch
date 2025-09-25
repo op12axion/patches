@@ -1,21 +1,24 @@
-From ad03985ed542959a1e5fa91f8913cf4b608d9342 Mon Sep 17 00:00:00 2001
+From 96b1f280bf938935b3bf072816d470eaefafec3f Mon Sep 17 00:00:00 2001
 From: andy <66240551+flandolf@users.noreply.github.com>
-Date: Mon, 22 Sep 2025 20:38:48 +1000
-Subject: [PATCH] [FIX] Update APN configurations and correct touch HAL
- versioning
+Date: Wed, 24 Sep 2025 11:16:01 +1000
+Subject: [PATCH] [CONFIG] Update surface flinger settings and refine APN
+ configurations
 
-Change-Id: Ic5d4d0be4dcefa545bf9655e5b8a7e14328e8af0
+Change-Id: I99c3642fe7b6abf9d1bc4c5e03f3500198a2b022
 
 diff --git a/config/defaults_common.prop b/config/defaults_common.prop
-index fd367efc..78408611 100644
+index 83666438..8001fe2c 100644
 --- a/config/defaults_common.prop
 +++ b/config/defaults_common.prop
-@@ -22,4 +22,4 @@ ro.input.video_enabled=false
+@@ -29,7 +29,7 @@ ro.input.video_enabled=false
  debug.graphics.game_default_frame_rate.disabled=true
  
  # sf
 -ro.surface_flinger.uclamp.min=1
 +# ro.surface_flinger.uclamp.min=1
+ 
+ # memcg
+ ro.config.per_app_memcg=true
 diff --git a/config/device_framework_matrix.xml b/config/device_framework_matrix.xml
 index 8d5b4107..4b6c880e 100644
 --- a/config/device_framework_matrix.xml
