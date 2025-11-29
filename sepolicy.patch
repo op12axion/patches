@@ -1,24 +1,22 @@
-From e8ded0647b02bc016188f2bdd7278b39ae91fbf7 Mon Sep 17 00:00:00 2001
-From: flandolf <66240551+flandolf@users.noreply.github.com>
-Date: Sun, 10 Aug 2025 20:16:41 +1000
-Subject: [PATCH] axion patch
+From 44fa30cd63eb543d04a67adf66fa2502ab121d60 Mon Sep 17 00:00:00 2001
+From: andy <66240551+flandolf@users.noreply.github.com>
+Date: Sat, 29 Nov 2025 12:53:02 +1100
+Subject: [PATCH] allow platform_app to set touch sensitivity property
 
-Change-Id: I33638f53fdfae29a942651db5001059ddb37ac87
----
- common/private/platform_app.te | 3 +++
- 1 file changed, 3 insertions(+)
+Change-Id: I31dc31d2da2d987d0ffbcd3e6af487ef362c2f16
 
 diff --git a/common/private/platform_app.te b/common/private/platform_app.te
-index 07183e7..8175a7a 100644
+index 585b032..610c919 100644
 --- a/common/private/platform_app.te
 +++ b/common/private/platform_app.te
-@@ -9,3 +9,6 @@ hal_client_domain(platform_app, hal_lineage_livedisplay)
+@@ -10,3 +10,6 @@ hal_client_domain(platform_app, hal_lineage_powershare)
+ get_prop(platform_app, usb_uvc_enabled_prop)
  
- # Allow PowerShare HAL service to be found
- hal_client_domain(platform_app, hal_lineage_powershare)
+ get_prop(platform_app, bluetooth_lea_prop)
 +
 +# Allow SystemUI to set touch sensitivity prop
 +allow platform_app debug_prop:property_service set;
+\ No newline at end of file
 -- 
-2.48.1
+2.52.0
 

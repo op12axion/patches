@@ -1,18 +1,256 @@
-From a4d75faa5c2a8d964c91189f47be7f080c3540eb Mon Sep 17 00:00:00 2001
-From: flandolf <66240551+flandolf@users.noreply.github.com>
-Date: Thu, 4 Sep 2025 17:49:58 +1000
-Subject: [PATCH] Settings: Add haptic effect style and LTPO features options
+From 116ca4a5a016f187cbe138f83a943d7e1fec2284 Mon Sep 17 00:00:00 2001
+From: andy <66240551+flandolf@users.noreply.github.com>
+Date: Sat, 29 Nov 2025 12:50:12 +1100
+Subject: [PATCH] Settings: Add haptic effect style and LTPO features
+ preferences
 
-Change-Id: I24e5d6446a892248ff0452a68333599f63e533af
+Change-Id: Ibf7ae5314a75d66651d0a227e13941c49945f46a
 
 diff --git a/res/values/arrays.xml b/res/values/arrays.xml
-index 80c3e8d2c4b..2f4a45f72b4 100644
+index 2c11bd8ffa7..b833b8821bc 100644
 --- a/res/values/arrays.xml
 +++ b/res/values/arrays.xml
-@@ -1647,4 +1647,18 @@
-     <!-- Packages that will not show Display over other apps permission -->
-     <string-array name="display_over_apps_permission_change_exempt">
+@@ -18,7 +18,8 @@
+ */
+ -->
+ <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-    <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown in a list dialog. -->
++    <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown
++    in a list dialog. -->
+     <string-array name="screen_timeout_entries">
+         <item>15 seconds</item>
+         <item>30 seconds</item>
+@@ -107,7 +108,8 @@
+ 
+     <!-- Wi-Fi settings -->
+ 
+-    <!-- Match this with the order of NetworkInfo.DetailedState. --> <skip />
++    <!-- Match this with the order of NetworkInfo.DetailedState. -->
++    <skip />
+     <!-- Wi-Fi settings. The status messages when the network is unknown. -->
+     <string-array name="wifi_status">
+         <!-- Status message of Wi-Fi when it is idle. -->
+@@ -160,7 +162,8 @@
+         <item>0</item>
      </string-array>
+ 
+-    <!-- Match this with the constants in WifiDialog. --> <skip />
++    <!-- Match this with the constants in WifiDialog. -->
++    <skip />
+     <!-- Wi-Fi settings.  The type of EAP method a Wi-Fi network has. -->
+     <string-array name="wifi_eap_method" translatable="false">
+         <item>PEAP</item>
+@@ -307,7 +310,8 @@
+         <item>2</item>
+     </string-array>
+ 
+-    <!-- Match this with drawable.wifi_signal. --> <skip />
++    <!-- Match this with drawable.wifi_signal. -->
++    <skip />
+     <!-- Wi-Fi settings. The signal strength a Wi-Fi network has. -->
+     <string-array name="wifi_signal">
+         <item>Poor</item>
+@@ -343,7 +347,8 @@
+     <!-- Wi-Fi IP settings. -->
+     <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+     <string-array name="wifi_ip_settings">
+-        <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR LIMIT=25] -->
++        <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR
++        LIMIT=25] -->
+         <item>DHCP</item>
+         <!-- Use statically defined IP settings [CHAR LIMIT=25]-->
+         <item>Static</item>
+@@ -665,7 +670,8 @@
+         <item>Long</item>
+     </string-array>
+ 
+-    <!-- Avoid the gender issue, create the new fork of the string long_press_timeout_selector_titles -->
++    <!-- Avoid the gender issue, create the new fork of the string
++    long_press_timeout_selector_titles -->
+     <!-- Titles for the list of long press timeout options in preference. -->
+     <string-array name="long_press_timeout_selector_list_titles">
+         <!-- A title for the option for short long-press timeout [CHAR LIMIT=25] -->
+@@ -679,7 +685,8 @@
+     <!-- Ethernet IP settings. -->
+     <!-- Note that adding/removing/moving the items will need ethernet settings code change. -->
+     <string-array name="ethernet_ip_settings">
+-        <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR LIMIT=25] -->
++        <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR
++        LIMIT=25] -->
+         <item>DHCP</item>
+         <!-- Use statically defined IP settings [CHAR LIMIT=25]-->
+         <item>Static</item>
+@@ -706,7 +713,7 @@
+     </string-array>
+ 
+     <!-- Values for captioning typeface preference. -->
+-    <string-array name="captioning_typeface_selector_values" translatable="false" >
++    <string-array name="captioning_typeface_selector_values" translatable="false">
+         <item></item>
+         <item>sans-serif</item>
+         <item>sans-serif-condensed</item>
+@@ -728,7 +735,7 @@
+     </string-array>
+ 
+     <!-- Values for captioning font size preference. -->
+-    <string-array name="captioning_font_size_selector_values" translatable="false" >
++    <string-array name="captioning_font_size_selector_values" translatable="false">
+         <item>0.25</item>
+         <item>0.5</item>
+         <item>1.0</item>
+@@ -747,7 +754,7 @@
+     </string-array>
+ 
+     <!-- Values for captioning character edge type preference. -->
+-    <integer-array name="captioning_edge_type_selector_values" translatable="false" >
++    <integer-array name="captioning_edge_type_selector_values" translatable="false">
+         <item>-1</item>
+         <item>0</item>
+         <item>1</item>
+@@ -757,7 +764,7 @@
+     </integer-array>
+ 
+     <!-- Titles for captioning color preference. -->
+-    <string-array name="captioning_color_selector_titles" translatable="false" >
++    <string-array name="captioning_color_selector_titles" translatable="false">
+         <item>@string/color_unspecified</item>
+         <item>@string/color_white</item>
+         <item>@string/color_black</item>
+@@ -770,7 +777,7 @@
+     </string-array>
+ 
+     <!-- Values for captioning color preference. -->
+-    <integer-array name="captioning_color_selector_values" translatable="false" >
++    <integer-array name="captioning_color_selector_values" translatable="false">
+         <item>0x00FFFFFF</item>
+         <item>0xFFFFFFFF</item>
+         <item>0xFF000000</item>
+@@ -839,7 +846,7 @@
+     </integer-array>
+ 
+     <!-- Titles for captioning opacity preference. [CHAR LIMIT=35] -->
+-    <string-array name="captioning_opacity_selector_titles" >
++    <string-array name="captioning_opacity_selector_titles">
+         <item>25%</item>
+         <item>50%</item>
+         <item>75%</item>
+@@ -847,7 +854,7 @@
+     </string-array>
+ 
+     <!-- Values for captioning opacity preference. -->
+-    <integer-array name="captioning_opacity_selector_values" translatable="false" >
++    <integer-array name="captioning_opacity_selector_values" translatable="false">
+         <item>0x40FFFFFF</item>
+         <item>0x80FFFFFF</item>
+         <item>0xC0FFFFFF</item>
+@@ -855,7 +862,7 @@
+     </integer-array>
+ 
+     <!-- Titles for captioning text style preset preference. [CHAR LIMIT=35] -->
+-    <string-array name="captioning_preset_selector_titles" >
++    <string-array name="captioning_preset_selector_titles">
+         <item>Set by app</item>
+         <item>White on black</item>
+         <item>Black on white</item>
+@@ -865,7 +872,7 @@
+     </string-array>
+ 
+     <!-- Values for captioning text style preset preference. -->
+-    <integer-array name="captioning_preset_selector_values" translatable="false" >
++    <integer-array name="captioning_preset_selector_values" translatable="false">
+         <item>4</item>
+         <item>0</item>
+         <item>1</item>
+@@ -896,14 +903,15 @@
+     </string-array>
+ 
+     <!-- Values for the accessibility button size. -->
+-    <string-array name="accessibility_button_size_selector_values" translatable="false" >
++    <string-array name="accessibility_button_size_selector_values" translatable="false">
+         <!-- Small -->
+         <item>0</item>
+         <!-- Large -->
+         <item>1</item>
+     </string-array>
+ 
+-    <!-- Match this with the array VPN_TYPES in ConfigDialog. --> <skip />
++    <!-- Match this with the array VPN_TYPES in ConfigDialog. -->
++    <skip />
+     <!-- Short names for each VPN type, not really translatable. [CHAR LIMIT=20] -->
+     <string-array name="vpn_types" translatable="false">
+         <item>IKEv2/IPSec MSCHAPv2</item>
+@@ -919,7 +927,8 @@
+         <item>Manual</item>
+     </string-array>
+ 
+-    <!-- Match this with the constants in LegacyVpnInfo. --> <skip />
++    <!-- Match this with the constants in LegacyVpnInfo. -->
++    <skip />
+     <!-- Status for a VPN network. [CHAR LIMIT=100] -->
+     <string-array name="vpn_states">
+         <!-- Status message when VPN is disconnected. -->
+@@ -1091,7 +1100,8 @@
+         <item>zen_mode_from_none</item>
+     </string-array>
+ 
+-    <!--String arrays for notification swipe direction -->
++    <!--String
++    arrays for notification swipe direction -->
+     <string-array name="swipe_direction_titles">
+         <item>@string/swipe_direction_rtl</item>
+         <item>@string/swipe_direction_ltr</item>
+@@ -1142,7 +1152,7 @@
+     </string-array>
+ 
+     <!-- Values for autofill logging level preference. -->
+-    <string-array name="autofill_logging_level_values" translatable="false" >
++    <string-array name="autofill_logging_level_values" translatable="false">
+         <item>0</item> <!-- AutofillManager.NO_LOGGING -->
+         <item>2</item> <!-- AutofillManager.FLAG_ADD_CLIENT_DEBUG -->
+         <item>4</item> <!-- AutofillManager.FLAG_ADD_CLIENT_VERBOSE -->
+@@ -1263,7 +1273,7 @@
+     </string-array>
+     <!-- The preferred network modes RIL constants, in order of the modes above,
+          e.g. the choice "GSM/WCDMA preferred" has the corresponding value "0" -->
+-    <string-array name="preferred_network_mode_values"  translatable="false">
++    <string-array name="preferred_network_mode_values" translatable="false">
+         <item>"0"</item>
+         <item>"1"</item>
+         <item>"2"</item>
+@@ -1336,7 +1346,7 @@
+     </string-array>
+ 
+     <!-- Array of titles palette list for accessibility. -->
+-    <string-array name="setting_palette_data" translatable="false" >
++    <string-array name="setting_palette_data" translatable="false">
+         <item>@string/color_red</item>
+         <item>@string/color_orange</item>
+         <item>@string/color_yellow</item>
+@@ -1348,7 +1358,7 @@
+     </string-array>
+ 
+     <!-- Values for palette list view preference. -->
+-    <array name="setting_palette_colors" translatable="false" >
++    <array name="setting_palette_colors" translatable="false">
+         <item>@color/palette_list_color_red</item>
+         <item>@color/palette_list_color_orange</item>
+         <item>@color/palette_list_color_yellow</item>
+@@ -1359,7 +1369,8 @@
+         <item>@color/palette_list_color_gray</item>
+     </array>
+ 
+-    <!--String arrays for showing the rtt settings options -->
++    <!--String
++    arrays for showing the rtt settings options -->
+     <string-array name="rtt_setting_mode">
+         <!-- 0: Invalid value -->
+         <item></item>
+@@ -1660,4 +1671,19 @@
+         <item>Notifications</item>
+         <item>Quick settings</item>
+     </string-array>
+-</resources>
++
 +
 +    <!-- Haptic Effect Styles -->
 +    <string-array name="haptic_effect_style_entries" translatable="false">
@@ -21,38 +259,22 @@ index 80c3e8d2c4b..2f4a45f72b4 100644
 +        <item>Gentle</item>
 +    </string-array>
 +
++
 +    <string-array name="haptic_effect_style_values" translatable="false">
 +        <item>richtap</item>
 +        <item>crisp</item>
 +        <item>gentle</item>
 +    </string-array>
-+
- </resources>
++</resources>
+\ No newline at end of file
 diff --git a/res/values/config.xml b/res/values/config.xml
-index 1177b5cb8aa..a69df2cd016 100644
+index c5303ef8962..cfb5a51d364 100644
 --- a/res/values/config.xml
 +++ b/res/values/config.xml
-@@ -856,4 +856,11 @@
- 
+@@ -873,6 +873,14 @@
      <!-- Whether the Gaze is enabled -->
      <bool name="config_gazeEnabled">false</bool>
-+
-+    <!-- Show haptic styles -->
-+    <bool name="config_supportHapticProfiles" translatable="false">false</bool>
-+
-+    <!-- Show LTOP features option -->
-+    <bool name="config_supportLtpoFeatures" translatable="false">false</bool>
-+    
- </resources>
-diff --git a/res/values/strings.xml b/res/values/strings.xml
-index 774e776022b..0aabeef28b5 100644
---- a/res/values/strings.xml
-+++ b/res/values/strings.xml
-@@ -14399,4 +14399,12 @@ Data usage charges may apply.</string>
-     <!-- Title for supervision PIN verification screen [CHAR LIMIT=60] -->
-     <string name="supervision_full_screen_pin_verification_title">Enter supervision PIN</string>
-     <string name="accessibility_illustration_content_description"><xliff:g id="feature" example="Select to Speak">%1$s</xliff:g> animation</string>
-+
+ 
 +    <!-- Haptic Effect Style -->
 +    <string name="haptic_effect_style_title">Haptic effect style</string>
 +
@@ -60,13 +282,35 @@ index 774e776022b..0aabeef28b5 100644
 +    <string name="ltpo_features_title">Enable LTPO features</string>
 +    <string name="ltpo_features_summary">Enables device-specific adaptive idle and frame rate features for improving efficiency</string>
 +
++
+     <!-- Whether to share the WiFi network by default. -->
+     <bool name="config_share_network_by_default">true</bool>
+ 
+@@ -885,4 +893,7 @@
+         <item>1234</item>
+         -->
+     </integer-array>
++
++    <!-- Show haptic styles -->
++    <bool name="config_supportHapticProfiles" translatable="false">false</bool>
+ </resources>
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index a1ee7b98860..9241ff2203c 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -14655,4 +14655,6 @@ Data usage charges may apply.</string>
+         <item>.inversePrimary:@sud_system_primary_inverse_light</item>
+     </string-array>
+ 
++    <!-- Haptic Effect Style -->
++    <string name="haptic_effect_style_title">Haptic effect style</string>
  </resources>
 diff --git a/res/xml/accessibility_vibration_intensity_settings.xml b/res/xml/accessibility_vibration_intensity_settings.xml
-index a36b20b8ffd..d6cac123475 100644
+index f1fc240ed21..f435af0bbde 100644
 --- a/res/xml/accessibility_vibration_intensity_settings.xml
 +++ b/res/xml/accessibility_vibration_intensity_settings.xml
 @@ -65,6 +65,13 @@
-         android:key="vibration_intensity_category_haptics"
+         android:key="vibration_category_haptics"
          android:title="@string/accessibility_interactive_haptics_category_title">
  
 +        <com.android.settings.accessibility.HapticStyleListPreference
@@ -77,17 +321,17 @@ index a36b20b8ffd..d6cac123475 100644
 +            app:controller="com.android.settings.accessibility.HapticStylePreferenceController" />
 +
          <com.android.settingslib.widget.SliderPreference
-             android:key="vibration_intensity_preference_touch"
+             android:key="haptic_feedback_intensity"
              android:title="@string/accessibility_touch_vibration_title"
 diff --git a/res/xml/accessibility_vibration_settings.xml b/res/xml/accessibility_vibration_settings.xml
-index b8cb2305a16..8266655b7cc 100644
+index 98bdd44fe6f..4d3f98f4c4f 100644
 --- a/res/xml/accessibility_vibration_settings.xml
 +++ b/res/xml/accessibility_vibration_settings.xml
-@@ -65,6 +65,13 @@
-         android:key="vibration_category_haptics"
-         android:title="@string/accessibility_interactive_haptics_category_title">
+@@ -68,6 +68,13 @@
+         android:title="@string/accessibility_interactive_haptics_category_title"
+         android:persistent="false">
  
-+         <com.android.settings.accessibility.HapticStyleListPreference
++        <com.android.settings.accessibility.HapticStyleListPreference
 +            android:key="haptic_style"
 +            android:title="@string/haptic_effect_style_title"
 +            android:entries="@array/haptic_effect_style_entries"
@@ -95,16 +339,18 @@ index b8cb2305a16..8266655b7cc 100644
 +            app:controller="com.android.settings.accessibility.HapticStylePreferenceController" />
 +
          <SwitchPreferenceCompat
-             android:key="vibration_preference_touch"
+             android:key="haptic_feedback_intensity"
              android:title="@string/accessibility_touch_vibration_title"
 diff --git a/res/xml/display_settings.xml b/res/xml/display_settings.xml
-index 9855304325e..ca8810cea13 100644
+index b2da842d3e2..81ed6052406 100644
 --- a/res/xml/display_settings.xml
 +++ b/res/xml/display_settings.xml
-@@ -176,6 +176,12 @@
-             android:fragment="com.android.settings.display.RefreshRateSettings"
-             settings:controller="com.android.settings.display.RefreshRateSettingsPreferenceController" />
- 
+@@ -209,7 +209,13 @@
+             android:title="@string/peak_refresh_rate_title"
+             android:summary="@string/peak_refresh_rate_summary"
+             settings:controller="com.android.settings.display.PeakRefreshRatePreferenceController"/>
+-
++        
 +        <SwitchPreferenceCompat
 +            android:key="ltpo_features"
 +            android:title="@string/ltpo_features_title"
@@ -116,144 +362,208 @@ index 9855304325e..ca8810cea13 100644
              android:title="@string/show_operator_name_title"
 diff --git a/src/com/android/settings/accessibility/HapticStyleListPreference.java b/src/com/android/settings/accessibility/HapticStyleListPreference.java
 new file mode 100644
-index 00000000000..2ee30f49a91
+index 00000000000..410999b4d2e
 --- /dev/null
 +++ b/src/com/android/settings/accessibility/HapticStyleListPreference.java
-@@ -0,0 +1,23 @@
+@@ -0,0 +1,34 @@
 +package com.android.settings.accessibility;
 +
 +import android.content.Context;
++
 +import android.os.SystemProperties;
++
 +import android.provider.Settings;
++
 +import android.util.AttributeSet;
++
 +import androidx.preference.ListPreference;
 +
 +public class HapticStyleListPreference extends ListPreference {
++
 +    private static final String PROP_KEY = "persist.sys.haptic_profile";
++
 +    private static final String SETTINGS_KEY = Settings.Secure.HAPTIC_EFFECTS_PROFILE;
 +
 +    public HapticStyleListPreference(Context context, AttributeSet attrs) {
++
 +        super(context, attrs);
++
 +    }
 +
 +    @Override
++
 +    public void setValue(String value) {
 +        super.setValue(value);
 +        SystemProperties.set(PROP_KEY, value);
-+	Settings.Secure.putString(getContext().getContentResolver(), SETTINGS_KEY, value);
++        Settings.Secure.putString(getContext().getContentResolver(), SETTINGS_KEY, value);
++
 +    }
++
 +}
-\ No newline at end of file
 diff --git a/src/com/android/settings/accessibility/HapticStylePreferenceController.java b/src/com/android/settings/accessibility/HapticStylePreferenceController.java
 new file mode 100644
-index 00000000000..3698115f7d8
+index 00000000000..5769ef3b88e
 --- /dev/null
 +++ b/src/com/android/settings/accessibility/HapticStylePreferenceController.java
-@@ -0,0 +1,79 @@
+@@ -0,0 +1,135 @@
 +package com.android.settings.accessibility;
 +
 +import android.content.Context;
++
 +import android.os.SystemProperties;
++
 +import android.provider.Settings;
++
 +import androidx.preference.ListPreference;
++
 +import androidx.preference.Preference;
++
 +import androidx.preference.PreferenceScreen;
 +
 +import com.android.settings.core.BasePreferenceController;
++
 +import com.android.settings.R;
 +
 +public class HapticStylePreferenceController extends BasePreferenceController
 +        implements Preference.OnPreferenceChangeListener {
 +
 +    private static final String PROP_KEY = "debug.haptic_profile";
++
 +    private static final String SETTINGS_KEY = Settings.Secure.HAPTIC_EFFECTS_PROFILE;
++
 +    private ListPreference mPreference;
 +
 +    public HapticStylePreferenceController(Context context, String preferenceKey) {
++
 +        super(context, preferenceKey);
++
 +    }
 +
 +    @Override
++
 +    public int getAvailabilityStatus() {
++
 +        return mContext.getResources().getBoolean(R.bool.config_supportHapticProfiles) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
++
 +    }
 +
 +    @Override
++
 +    public void displayPreference(PreferenceScreen screen) {
++
 +        super.displayPreference(screen);
++
 +        Preference pref = screen.findPreference(getPreferenceKey());
++
 +        if (pref instanceof ListPreference) {
++
 +            mPreference = (ListPreference) pref;
++
 +            mPreference.setOnPreferenceChangeListener(this);
++
 +            updateState(mPreference);
++
 +        }
++
 +    }
 +
 +    @Override
++
 +    public void updateState(Preference preference) {
++
 +        super.updateState(preference);
++
 +        if (preference instanceof ListPreference) {
++
 +            ListPreference listPref = (ListPreference) preference;
++
 +            String currentValue = Settings.Secure.getString(mContext.getContentResolver(), SETTINGS_KEY);
 +
 +            // If the property is empty, use the first entry value as default
 +            if (currentValue == null || currentValue.isEmpty()) {
++
 +                CharSequence[] entryValues = listPref.getEntryValues();
++
 +                if (entryValues != null && entryValues.length > 0) {
++
 +                    currentValue = entryValues[0].toString();
++
 +                    listPref.setValue(currentValue);
++
 +                    SystemProperties.set(PROP_KEY, currentValue);
-+		    Settings.Secure.putString(mContext.getContentResolver(), SETTINGS_KEY, currentValue);
++
++                    Settings.Secure.putString(mContext.getContentResolver(), SETTINGS_KEY, currentValue);
++
 +                }
++
 +            } else {
++
 +                listPref.setValue(currentValue);
++
 +            }
 +
 +            int index = listPref.findIndexOfValue(currentValue);
++
 +            if (index >= 0) {
++
 +                preference.setSummary(listPref.getEntries()[index]);
++
 +            }
++
 +        }
++
 +    }
 +
 +    @Override
++
 +    public boolean onPreferenceChange(Preference preference, Object newValue) {
-+        if (!(preference instanceof ListPreference)) return false;
-+        String value = (String) newValue;
-+        SystemProperties.set(PROP_KEY, value);
-+        Settings.Secure.putString(mContext.getContentResolver(), SETTINGS_KEY, value);
-+        int index = mPreference.findIndexOfValue(value);
-+        if (index >= 0) {
-+            mPreference.setSummary(mPreference.getEntries()[index]);
++
++        if (!(preference instanceof ListPreference)) {
++            return false;
 +        }
++
++        String value = (String) newValue;
++
++        SystemProperties.set(PROP_KEY, value);
++
++        Settings.Secure.putString(mContext.getContentResolver(), SETTINGS_KEY, value);
++
++        int index = mPreference.findIndexOfValue(value);
++
++        if (index >= 0) {
++
++            mPreference.setSummary(mPreference.getEntries()[index]);
++
++        }
++
 +        return true;
++
 +    }
++
 +}
-\ No newline at end of file
 diff --git a/src/com/android/settings/display/LtpoFeaturesPreferenceController.java b/src/com/android/settings/display/LtpoFeaturesPreferenceController.java
 new file mode 100644
-index 00000000000..4b84dff73c2
+index 00000000000..1f79cf4d751
 --- /dev/null
 +++ b/src/com/android/settings/display/LtpoFeaturesPreferenceController.java
-@@ -0,0 +1,61 @@
+@@ -0,0 +1,60 @@
 +/*
-+ * Copyright (C) 2021 The Proton AOSP Project
-+ *
-+ * Licensed under the Apache License, Version 2.0 (the "License");
-+ * you may not use this file except in compliance with the License.
-+ * You may obtain a copy of the License at
-+ *
-+ *      http://www.apache.org/licenses/LICENSE-2.0
-+ *
-+ * Unless required by applicable law or agreed to in writing, software
-+ * distributed under the License is distributed on an "AS IS" BASIS,
-+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-+ * See the License for the specific language governing permissions and
-+ * limitations under the License.
-+ */
++* Copyright (C) 2021 The Proton AOSP Project
++*
++* Licensed under the Apache License, Version 2.0 (the "License");
++* you may not use this file except in compliance with the License.
++* You may obtain a copy of the License at
++*
++*      http://www.apache.org/licenses/LICENSE-2.0
++*
++* Unless required by applicable law or agreed to in writing, software
++* distributed under the License is distributed on an "AS IS" BASIS,
++* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++* See the License for the specific language governing permissions and
++* limitations under the License.
++*/
 +
 +package com.android.settings.display;
-+
 +import android.content.Context;
 +import android.os.SystemProperties;
 +import android.provider.Settings;
@@ -299,5 +609,5 @@ index 00000000000..4b84dff73c2
 +}
 \ No newline at end of file
 -- 
-2.48.1
+2.52.0
 
